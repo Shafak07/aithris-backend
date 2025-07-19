@@ -2,6 +2,7 @@ from flask import Flask
 from .extensions import db, jwt,migrate
 from .routes.auth_routes import auth_bp
 from .config import Config
+from flask_cors import CORS
 
 
 def create_app():
@@ -11,8 +12,9 @@ def create_app():
     db.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
+    CORS(app)
 
-    app.register_blueprint(auth_bp)
+    app.register_blueprint(auth_bp, url_prefix="/auth")
     
 
     return app
