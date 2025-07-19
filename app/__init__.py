@@ -3,6 +3,9 @@ from .extensions import db, jwt,migrate
 from .routes.auth_routes import auth_bp
 from .config import Config
 from flask_cors import CORS
+from .routes.project_routes import project_bp
+from .routes.wallet_routes import wallet_bp
+from .routes.grievance_routes import grievance_bp
 
 
 def create_app():
@@ -15,6 +18,9 @@ def create_app():
     CORS(app)
 
     app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(project_bp)
+    app.register_blueprint(wallet_bp)
+    app.register_blueprint(grievance_bp)
     
-
+ 
     return app
